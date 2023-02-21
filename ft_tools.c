@@ -6,7 +6,7 @@
 /*   By: jecontre <jecontre@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 12:31:08 by jecontre          #+#    #+#             */
-/*   Updated: 2023/02/11 13:18:56 by jecontre         ###   ########.fr       */
+/*   Updated: 2023/02/20 11:54:26 by jecontre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ char	*ft_strjoin(char const *str1, char const *str2)
 	i = 0;
 	dst = (char *)malloc((ft_strlen(str1) + ft_strlen(str2) + 1) * sizeof(char));
 	if (!dst)
-		retunr (NULL);
-	while (str[i] != '\0')
+		return (NULL);
+	while (str1[i] != '\0')
 	{
 		dst[i] = str1[i];
 		i++;
@@ -48,12 +48,12 @@ char	*ft_strjoin(char const *str1, char const *str2)
 	return (dst);
 }
 
-void	ft_bzero(void *str, size_t n)
+void	ft_bzero(char *str, size_t n)
 {
 	size_t	i;
 	char	*str_clean;
 
-	str_clen = str;
+	str_clean = str;
 	i = 0;
 	while (i < n)
 	{
