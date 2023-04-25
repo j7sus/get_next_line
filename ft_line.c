@@ -22,7 +22,7 @@ char	*ft_line(char *str)
 		i++;
 	if (str[i] == '\n')
 		i++;
-	line = malloc(i + 1 * sizeof(char));
+	line = ft_calloc(i + 1 * sizeof(char));
 	if (!line)
 		return (NULL);
 	i = 0;
