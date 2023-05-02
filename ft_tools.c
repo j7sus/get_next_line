@@ -64,7 +64,7 @@ void	ft_bzero(char *str, size_t n)
 
 void	*ft_calloc(size_t count, size_t size)
 {
-	size_t	len;
+	size_t	i;
 	size_t	*tmp;
 	void	*memory;
 
@@ -72,11 +72,11 @@ void	*ft_calloc(size_t count, size_t size)
 	memory = malloc(tmp);
 	if (!memory)
 		return (NULL);
-	len = 0;
-	while (len < tmp)
+	i = 0;
+	while (i < tmp)
 	{
-		((char*)memory)[len] = 0;
-		len++;
+		((char*)memory)[i] = 0;
+		i++;
 	}
 	return (memory);
 }
