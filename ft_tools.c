@@ -75,8 +75,8 @@ void	*ft_calloc(size_t count, size_t size)
 	len = 0;
 	while (len < tmp)
 	{
-		(char*)memory[i] = 0;
-		i++;
+		((char*)memory)[len] = 0;
+		len++;
 	}
 	return (memory);
 }
