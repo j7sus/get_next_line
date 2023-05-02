@@ -64,11 +64,19 @@ void	ft_bzero(char *str, size_t n)
 
 void	*ft_calloc(size_t count, size_t size)
 {
-	void	*str;
+	size_t	*len;
+	size_t	*tmp;
+	void	*memory;
 
-	str = (void *)malloc(count * size);
-	if (!str)
+	tmp = count * size;
+	memory = malloc(tmp);
+	if (!memory)
 		return (NULL);
-	ft_bzero(str, count * size);
-	return (str);
+	len = 0;
+	while (len < tmp)
+	{
+		(char*)memory[i] = 0;
+		i++;
+	}
+	return (memory);
 }
