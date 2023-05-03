@@ -73,10 +73,25 @@ void	*ft_calloc(size_t count, size_t size)
 	if (!memory)
 		return (NULL);
 	len = 0;
-	while (i < tmp)
+	while (len < tmp)
 	{
 		((char*)memory)[len] = 0;
 		len++;
 	}
 	return (memory);
+}
+
+char	*ft_free(char **buff1, char **buff2)
+{
+	if (*buff1 && buff1)
+	{
+		free(*buff1);
+		*buff1 = NULL;
+	}
+	if (*buff2 && buff2)
+	{
+		free(*buff2);
+		*buff2 = NULL;
+	}
+	return (NULL)
 }
