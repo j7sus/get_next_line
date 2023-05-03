@@ -18,11 +18,13 @@ char	*ft_line(char *str)
 	int		i;
 
 	i = 0;
+	if (!str[i])
+		return (NULL);
 	while (str[i] != '\n' && str[i])
 		i++;
 	if (str[i] == '\n')
 		i++;
-	line = ft_calloc(i + 1 * sizeof(char));
+	line = ft_calloc(i + 1, sizeof(char));
 	if (!line)
 		return (NULL);
 	i = 0;
@@ -33,6 +35,5 @@ char	*ft_line(char *str)
 	}
 	if (str[i] == '\n')
 		line[i] = '\n';
-	line[i] = '\0';
 	return (line);
 }

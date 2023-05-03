@@ -93,5 +93,5 @@ char	*ft_free(char **buff1, char **buff2)
 		free(*buff2);
 		*buff2 = NULL;
 	}
-	return (NULL)
+	return (NULL);
 }
