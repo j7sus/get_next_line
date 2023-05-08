@@ -42,6 +42,17 @@ char	*ft_next(char *str)
 	return (next);
 }
 
+char *ft_free_join(char *buffer, char *reader)
+{
+	char *tmp;
+
+	tmp = ft_strjoin(buffer, reader);
+	if (!tmp)
+		return (ft_free(&buffer, &reader));
+	ft_free(&buffer, 0);
+	return (tmp);
+}
+
 int	main()
 {
 	char	*line;
