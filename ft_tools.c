@@ -6,7 +6,7 @@
 /*   By: jecontre <jecontre@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 12:31:08 by jecontre          #+#    #+#             */
-/*   Updated: 2023/05/10 13:53:25 by jecontre         ###   ########.fr       */
+/*   Updated: 2023/05/10 15:12:04 by jecontre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,20 +46,6 @@ char	*ft_strjoin(char const *str1, char const *str2)
 	}
 	dst[i] = '\0';
 	return (dst);
-}
-
-void	ft_bzero(char *str, size_t n)
-{
-	size_t	i;
-	char	*str_clean;
-
-	str_clean = str;
-	i = 0;
-	while (i < n)
-	{
-		str[i] = '\0';
-		i++;
-	}
 }
 
 void	*ft_calloc(size_t count, size_t size)
