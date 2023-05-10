@@ -6,7 +6,7 @@
 /*   By: jecontre <jecontre@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 12:31:08 by jecontre          #+#    #+#             */
-/*   Updated: 2023/02/20 11:54:26 by jecontre         ###   ########.fr       */
+/*   Updated: 2023/05/10 13:53:25 by jecontre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,5 +93,20 @@ char	*ft_free(char **buff1, char **buff2)
 		free(*buff2);
 		*buff2 = NULL;
 	}
+	return (NULL);
+}
+
+char	*ft_strchr(const char *s, int c)
+{
+	int	i;
+
+	i = 0;
+	while (s[i] != '\0')
+	{
+		if (s[i++] == (char)c)
+			return ((char *)&s[i]); 
+	}
+	if ((char)c == '\0' && s[i] == '\0')
+		return ((char *)&s[i]);
 	return (NULL);
 }
