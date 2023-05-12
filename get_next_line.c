@@ -53,9 +53,10 @@ char *ft_free_join(char *buffer, char *reader)
 	return (tmp);
 }
 
-char	*reader(int fd, int bytes, char *buff)
+char	*reader(int fd, char *buff)
 {
 	char	*tmp;
+	int	bytes;
 
 	tmp = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
 	if (!tmp)
@@ -74,6 +75,21 @@ char	*reader(int fd, int bytes, char *buff)
 	}
 	ft_free(&tmp, NULL);
 	return (NULL);
+}
+
+char	*get_next_line(int fd)
+{
+	char	*line;
+	static char	*buff;
+	
+	if (fd < 0 || BUFFER_SIZE <= 0)
+		return (0);
+	buff = char	*reader(fd, buff);
+	If (!buff)
+		return (NULL);
+	line = ft_line(buff);
+	buff = ft_next(buff);
+	return (line);
 }
 
 int	main()
