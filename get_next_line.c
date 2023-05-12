@@ -6,7 +6,7 @@
 /*   By: jecontre <jecontre@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 16:52:55 by jecontre          #+#    #+#             */
-/*   Updated: 2023/05/12 13:29:32 by jecontre         ###   ########.fr       */
+/*   Updated: 2023/05/12 14:44:08 by jecontre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,10 @@ char	*reader(int fd, int bytes, char *buff)
 	tmp = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
 	if (!tmp)
 		return (ft_free(&tmp, &buff));
-	if (BUFFER_SIZE > 0)
+	while (bytes > 0)
 	{
-		bytes = reader(fd, BUFER_SIZE, tmp);
-		if (BUFFER_SIZE < 0)
+		bytes = read(fd, tmp, BUFFER_SIZE);
+		if (bytes < 0)
 			return (ft_free(&tmp, &buff));
 		tmp[bytes] = '\0';
 		buff = ft_free_join(buff, tmp);

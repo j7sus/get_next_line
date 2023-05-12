@@ -6,7 +6,7 @@
 /*   By: jecontre <jecontre@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 10:50:33 by jecontre          #+#    #+#             */
-/*   Updated: 2023/05/12 12:26:00 by jecontre         ###   ########.fr       */
+/*   Updated: 2023/05/12 14:42:35 by jecontre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 #define GET_NEXT_LINE_H
 
 #include <stdio.h>
-#include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 
 size_t  ft_strlen(const char *str);
 char    *ft_strjoin(char const *str1, char const *str2);
