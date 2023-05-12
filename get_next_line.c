@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_next.c                                          :+:      :+:    :+:   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jecontre <jecontre@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 16:52:55 by jecontre          #+#    #+#             */
-/*   Updated: 2023/05/12 11:54:54 by jecontre         ###   ########.fr       */
+/*   Updated: 2023/05/12 13:29:32 by jecontre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,29 @@ char *ft_free_join(char *buffer, char *reader)
 		return (ft_free(&buffer, &reader));
 	ft_free(&buffer, 0);
 	return (tmp);
+}
+
+char	*reader(int fd, int bytes, char *buff)
+{
+	char	*tmp;
+
+	tmp = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
+	if (!tmp)
+		return (ft_free(&tmp, &buff));
+	if (BUFFER_SIZE > 0)
+	{
+		bytes = reader(fd, BUFER_SIZE, tmp);
+		if (BUFFER_SIZE < 0)
+			return (ft_free(&tmp, &buff));
+		tmp[bytes] = '\0';
+		buff = ft_free_join(buff, tmp);
+		if (!buff)
+			return (NULL);
+		if (ft_strchr(tmp, '\n'))
+				break ;
+	}
+	ft_free(&tmp, NULL);
+	return (NULL);
 }
 
 int	main()
