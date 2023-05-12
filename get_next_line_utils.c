@@ -6,7 +6,7 @@
 /*   By: jecontre <jecontre@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 12:31:08 by jecontre          #+#    #+#             */
-/*   Updated: 2023/05/10 15:12:04 by jecontre         ###   ########.fr       */
+/*   Updated: 2023/05/12 11:58:36 by jecontre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ char	*ft_strjoin(char const *str1, char const *str2)
 void	*ft_calloc(size_t count, size_t size)
 {
 	size_t	len;
-	size_t	*tmp;
+	size_t	tmp;
 	void	*memory;
 
 	tmp = count * size;
@@ -95,4 +95,30 @@ char	*ft_strchr(const char *s, int c)
 	if ((char)c == '\0' && s[i] == '\0')
 		return ((char *)&s[i]);
 	return (NULL);
+}
+
+char	*ft_line(char *str)
+{
+	char	*line;
+	int		i;
+
+	i = 0;
+	if (!str[i])
+		return (NULL);
+	while (str[i] != '\n' && str[i])
+		i++;
+	if (str[i] == '\n')
+		i++;
+	line = ft_calloc(i + 1, sizeof(char));
+	if (!line)
+		return (NULL);
+	i = 0;
+	while (str[i] != '\n' && str[i])
+	{
+		line[i] = str[i];
+		i++;
+	}
+	if (str[i] == '\n')
+		line[i] = '\n';
+	return (line);
 }
