@@ -6,7 +6,7 @@
 /*   By: jecontre <jecontre@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 16:52:55 by jecontre          #+#    #+#             */
-/*   Updated: 2023/05/15 16:29:50 by jecontre         ###   ########.fr       */
+/*   Updated: 2023/05/15 18:29:19 by jecontre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,40 +46,36 @@ char	*ft_next(char *str)
 	char	*next;
 
 	len1 = 0;
-	while (str[len1] != '\n' && str[len1])
+	while (str[len1] && str[len1] != '\n')
 		len1++;
-	if (str[len1] == '\n')
-		len1++;
-	len2 = len1;
-	while (str[len2] != '\n' && str[len2])
-		len2++;
-	if (str[len2] == '\n')
-		len2++;
-	next = malloc(len2 * sizeof(char));
+	if (!str)
+		return (ft_free(&str, NULL));
+	next = ft_calloc(ft_strlen(str) - len1 + 1, sizeof(char));
 	if (!next)
-		return (NULL);
+		return (ft_free(&str, NULL));
+	len1++;
 	len2 = 0;
-	while (str[len1] != '\n' && str[len1])
+	while (str[len1])
 	{
 		next[len2] = str[len1];
 		len1++;
 		len2++;
 	}
-	next[len2] = '\0';
+	ft_free(&str, NULL);
 	return (next);
 }
 
 char	*ft_free_join(char *buff, char *read)
 {	
 	char	*tmp;
-	printf("40\n");
+	
 
 	tmp = ft_strjoin(buff, read);
 	if (!tmp)
 		return (ft_free(&buff, &read));
-	printf("41\n");
+	
 	ft_free(&buff, 0);
-	printf("42\n");
+	
 	return (tmp); 
 }
 
@@ -93,22 +89,19 @@ char	*reader(int fd, char *buff, int bytes)
 		return (ft_free(&tmp, &buff));
 	while (bytes > 0)
 	{
-		printf("1\n");
 		bytes = read(fd, tmp, BUFFER_SIZE);
 		if (bytes < 0)
 			return (ft_free(&tmp, &buff));
 		tmp[bytes] = '\0';
-		printf("2\n");
+		//printf("buffer del read:%s\n",tmp);
 		buff = ft_free_join(buff, tmp);
-		printf("3\n");
+		//printf("buffer del join:%s\n",buff);
 		if (!buff)
 			return (NULL);
 		if (ft_strchr(tmp, '\n'))
 			break ;
-		printf("4\n");
 	}
 	ft_free(&tmp, NULL);
-	printf("5\n");
 	return (buff);
 }
 
@@ -125,22 +118,20 @@ char	*get_next_line(int fd)
 			ft_free(&buff, NULL);
 		return (NULL);
 	}
-	printf("a\n");
+	//printf("buffer_inicial: %s\n",buff);
 	if (!buff)
 		buff = ft_calloc(1, 1);
 	if (!buff)
 		return (ft_free(&buff, NULL));
 	bytes = 1;
-	printf("b\n");
 	buff = reader(fd, buff, bytes);
 	if (!buff)
 		return (NULL);
-	printf("c\n");
 	line = ft_line(buff, line);
 	if (!line || *line == '\0')
 		return (ft_free(&buff, &line));
-	printf("d\n");
 	buff = ft_next(buff);
+	//printf("buffer_final: %s\n",buff);
 	return (line);
 }
 
@@ -150,6 +141,7 @@ int	main(void)
 	char	*line;
 	//char *str= "hola\nmundo";
 	int i = 0;
+	int j = 0;
 
 	line = NULL;
 	if (fd < 0)
@@ -157,9 +149,17 @@ int	main(void)
 		printf("Error!!-->memory allocation\n");
 		return (0);
 	}
-	line = get_next_line(fd);
+	while (j==0)
+	{	
+		line = get_next_line(fd);
+		if (!line)
+			break;
+		printf("line [%d] content :%s\n\n", i++, line);
+	}
 	//line = ft_next(str);
-	printf("line [%d] content :%s", i++, line);
+	
+	
+	
 	close (fd);
 	return (0);
 }
