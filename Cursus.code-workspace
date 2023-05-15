@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "../.."
+		},
+		{
+			"path": "../../../../../../../../../Users/jecontre/discovery_piscine"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "discovery_piscine"
+	}
+}

@@ -6,7 +6,7 @@
 /*   By: jecontre <jecontre@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 16:52:55 by jecontre          #+#    #+#             */
-/*   Updated: 2023/05/15 12:52:03 by jecontre         ###   ########.fr       */
+/*   Updated: 2023/05/15 16:29:50 by jecontre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,8 @@
 #include <fcntl.h>
 
 
-char	*ft_line(char *str)
+char	*ft_line(char *str, char *line)
 {
-	char	*line;
 	int		i;
 
 	i = 0;
@@ -70,98 +69,77 @@ char	*ft_next(char *str)
 	return (next);
 }
 
-char	*ft_free_join(char *buffer, char *reader)
-{
+char	*ft_free_join(char *buff, char *read)
+{	
 	char	*tmp;
+	printf("40\n");
 
-	tmp = ft_strjoin(buffer, reader);
+	tmp = ft_strjoin(buff, read);
 	if (!tmp)
-		return (ft_free(&buffer, &reader));
-	ft_free(&buffer, 0);
-	return (tmp);
+		return (ft_free(&buff, &read));
+	printf("41\n");
+	ft_free(&buff, 0);
+	printf("42\n");
+	return (tmp); 
 }
 
-char	*reader(int fd, char *buff)
+char	*reader(int fd, char *buff, int bytes)
 {
 	char	*tmp;
-	int		bytes = 1;
+	//int		bytes = 1;
 
 	tmp = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
 	if (!tmp)
 		return (ft_free(&tmp, &buff));
 	while (bytes > 0)
 	{
+		printf("1\n");
 		bytes = read(fd, tmp, BUFFER_SIZE);
 		if (bytes < 0)
 			return (ft_free(&tmp, &buff));
 		tmp[bytes] = '\0';
+		printf("2\n");
 		buff = ft_free_join(buff, tmp);
+		printf("3\n");
 		if (!buff)
 			return (NULL);
 		if (ft_strchr(tmp, '\n'))
 			break ;
+		printf("4\n");
 	}
 	ft_free(&tmp, NULL);
+	printf("5\n");
 	return (buff);
-}
-char	*ft_protec_join(char *buffer, char *reader)
-{	
-	char	*temp;
-
-	temp = ft_strjoin(buffer, reader);
-	if (!temp)
-		return (ft_free(&buffer, &reader));
-	ft_free(&buffer, 0);
-	return (temp);
-}
-char	*ft_read_fd(int fd, char *buf, int bytes)
-{
-	char	*tmp;
-
-	tmp = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
-	if (!tmp)
-		return (ft_free(&buf, &tmp));
-	while (bytes > 0)
-	{
-		bytes = read(fd, tmp, BUFFER_SIZE);
-		if (bytes < 0)
-			return (ft_free(&buf, &tmp));
-		tmp[bytes] = '\0';
-		buf = ft_protec_join(buf, tmp);
-		if (!buf)
-			return (NULL);
-		if (ft_strchr(tmp, '\n'))
-			break ;
-	}
-	ft_free(&tmp, NULL);
-	return (buf);
 }
 
 char	*get_next_line(int fd)
 {
 	char		*line;
 	int			bytes;
-	static char	*buff;
+	static char	*buff = NULL;
 
 	line = NULL;
-	buff = NULL;
 	if (fd < 0 || BUFFER_SIZE <= 0)
 	{
 		if (buff)
 			ft_free(&buff, NULL);
 		return (NULL);
 	}
+	printf("a\n");
 	if (!buff)
 		buff = ft_calloc(1, 1);
 	if (!buff)
 		return (ft_free(&buff, NULL));
 	bytes = 1;
-	buff = reader(fd, buff);
+	printf("b\n");
+	buff = reader(fd, buff, bytes);
 	if (!buff)
 		return (NULL);
-	line = ft_line(buff);
+	printf("c\n");
+	line = ft_line(buff, line);
 	if (!line || *line == '\0')
 		return (ft_free(&buff, &line));
+	printf("d\n");
 	buff = ft_next(buff);
 	return (line);
 }
@@ -182,5 +160,6 @@ int	main(void)
 	line = get_next_line(fd);
 	//line = ft_next(str);
 	printf("line [%d] content :%s", i++, line);
+	close (fd);
 	return (0);
 }
