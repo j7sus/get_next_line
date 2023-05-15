@@ -6,11 +6,12 @@
 /*   By: jecontre <jecontre@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 16:52:55 by jecontre          #+#    #+#             */
-/*   Updated: 2023/05/12 14:44:08 by jecontre         ###   ########.fr       */
+/*   Updated: 2023/05/15 11:00:30 by jecontre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include <fcntl.h>
 
 char	*ft_next(char *str)
 {
@@ -42,9 +43,9 @@ char	*ft_next(char *str)
 	return (next);
 }
 
-char *ft_free_join(char *buffer, char *reader)
+char	*ft_free_join(char *buffer, char *reader)
 {
-	char *tmp;
+	char	*tmp;
 
 	tmp = ft_strjoin(buffer, reader);
 	if (!tmp)
@@ -53,9 +54,10 @@ char *ft_free_join(char *buffer, char *reader)
 	return (tmp);
 }
 
-char	*reader(int fd, int bytes, char *buff)
+char	*reader(int fd, char *buff)
 {
 	char	*tmp;
+	int		bytes;
 
 	tmp = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
 	if (!tmp)
@@ -70,20 +72,54 @@ char	*reader(int fd, int bytes, char *buff)
 		if (!buff)
 			return (NULL);
 		if (ft_strchr(tmp, '\n'))
-				break ;
+			break ;
 	}
 	ft_free(&tmp, NULL);
 	return (NULL);
 }
 
-int	main()
+char	*get_next_line(int fd)
+{
+	char		*line;
+	static char	*buff;
+
+	if (fd < 0 || BUFFER_SIZE <= 0)
+		return (0);
+	buff = reader(fd, buff);
+	if (!buff)
+		return (NULL);
+	line = ft_line(buff);
+	buff = ft_next(buff);
+	return (line);
+}
+
+int	main(void)
+{
+	int	fd = open("get_next_line/text.txt", O_RDONLY);
+	char	*line;
+	int	i;
+
+	i = 0;
+	//line = NULL;
+	if (i < 20)
+	{
+		line = get_next_line(fd);
+		printf("line: %d texto:  %s", i, line);
+		return (0);
+		free (line);
+		i++;
+	}
+	close (fd);
+}
+
+/*
+int	main(void)
 {
 	char	*line;
 	char	*next;
 	char	*str;
 
-	str = "Hola que tal?\n todo bien?\n llll";
-
+	str = "Hola mundo todo bien?\nhola destino\n Si todo bien\n";
 	line = ft_line(str);
 	next = ft_next(str);
 	printf("%s", line);
@@ -91,4 +127,4 @@ int	main()
 	free(line);
 	free(next);
 	return (0);
-}
+}*/
