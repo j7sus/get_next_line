@@ -57,7 +57,11 @@ char	*ft_free_join(char *buffer, char *reader)
 char	*reader(int fd, char *buff)
 {
 	char	*tmp;
+<<<<<<< HEAD
 	int		bytes;
+=======
+	int	bytes;
+>>>>>>> 543dd755649af709a4a5e29fabe27d50ee63c2cd
 
 	tmp = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
 	if (!tmp)
@@ -80,6 +84,7 @@ char	*reader(int fd, char *buff)
 
 char	*get_next_line(int fd)
 {
+<<<<<<< HEAD
 	char		*line;
 	static char	*buff;
 
@@ -87,12 +92,22 @@ char	*get_next_line(int fd)
 		return (0);
 	buff = reader(fd, buff);
 	if (!buff)
+=======
+	char	*line;
+	static char	*buff;
+	
+	if (fd < 0 || BUFFER_SIZE <= 0)
+		return (0);
+	buff = char	*reader(fd, buff);
+	If (!buff)
+>>>>>>> 543dd755649af709a4a5e29fabe27d50ee63c2cd
 		return (NULL);
 	line = ft_line(buff);
 	buff = ft_next(buff);
 	return (line);
 }
 
+<<<<<<< HEAD
 int	main(void)
 {
 	int	fd = open("get_next_line/text.txt", O_RDONLY);
@@ -114,6 +129,9 @@ int	main(void)
 
 /*
 int	main(void)
+=======
+int	main()
+>>>>>>> 543dd755649af709a4a5e29fabe27d50ee63c2cd
 {
 	char	*line;
 	char	*next;
