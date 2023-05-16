@@ -6,7 +6,7 @@
 /*   By: jecontre <jecontre@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 16:52:55 by jecontre          #+#    #+#             */
-/*   Updated: 2023/05/16 13:07:05 by jecontre         ###   ########.fr       */
+/*   Updated: 2023/05/16 14:54:04 by jecontre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ char	*ft_next(char *str)
 	len1 = 0;
 	while (str[len1] && str[len1] != '\n')
 		len1++;
-	if (!str)
+	if (!str[len1])
 		return (ft_free(&str, NULL));
 	next = ft_calloc(ft_strlen(str) - len1 + 1, sizeof(char));
 	if (!next)
