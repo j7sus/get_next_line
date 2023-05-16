@@ -6,13 +6,12 @@
 /*   By: jecontre <jecontre@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 16:52:55 by jecontre          #+#    #+#             */
-/*   Updated: 2023/05/15 18:29:19 by jecontre         ###   ########.fr       */
+/*   Updated: 2023/05/16 13:07:05 by jecontre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include <fcntl.h>
-
 
 char	*ft_line(char *str, char *line)
 {
@@ -67,22 +66,18 @@ char	*ft_next(char *str)
 
 char	*ft_free_join(char *buff, char *read)
 {	
-	char	*tmp;
-	
+	char	*tmp;	
 
 	tmp = ft_strjoin(buff, read);
 	if (!tmp)
 		return (ft_free(&buff, &read));
-	
 	ft_free(&buff, 0);
-	
-	return (tmp); 
+	return (tmp);
 }
 
 char	*reader(int fd, char *buff, int bytes)
 {
 	char	*tmp;
-	//int		bytes = 1;
 
 	tmp = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
 	if (!tmp)
@@ -93,9 +88,7 @@ char	*reader(int fd, char *buff, int bytes)
 		if (bytes < 0)
 			return (ft_free(&tmp, &buff));
 		tmp[bytes] = '\0';
-		//printf("buffer del read:%s\n",tmp);
 		buff = ft_free_join(buff, tmp);
-		//printf("buffer del join:%s\n",buff);
 		if (!buff)
 			return (NULL);
 		if (ft_strchr(tmp, '\n'))
@@ -118,7 +111,6 @@ char	*get_next_line(int fd)
 			ft_free(&buff, NULL);
 		return (NULL);
 	}
-	//printf("buffer_inicial: %s\n",buff);
 	if (!buff)
 		buff = ft_calloc(1, 1);
 	if (!buff)
@@ -131,10 +123,9 @@ char	*get_next_line(int fd)
 	if (!line || *line == '\0')
 		return (ft_free(&buff, &line));
 	buff = ft_next(buff);
-	//printf("buffer_final: %s\n",buff);
 	return (line);
 }
-
+/*
 int	main(void)
 {
 	int	fd = open("text.txt", O_RDONLY);
@@ -162,4 +153,4 @@ int	main(void)
 	
 	close (fd);
 	return (0);
-}
+}*/

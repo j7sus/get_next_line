@@ -6,7 +6,7 @@
 /*   By: jecontre <jecontre@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 12:31:08 by jecontre          #+#    #+#             */
-/*   Updated: 2023/05/15 16:33:23 by jecontre         ###   ########.fr       */
+/*   Updated: 2023/05/16 12:55:20 by jecontre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	*ft_calloc(size_t count, size_t size)
 	len = 0;
 	while (len < tmp)
 	{
-		((char*)memory)[len] = 0;
+		((char *)memory)[len] = 0;
 		len++;
 	}
 	return (memory);
@@ -66,7 +66,7 @@ char	*ft_strchr(const char *s, int c)
 	while (s[i] != '\0')
 	{
 		if (s[i++] == (char)c)
-			return ((char *)&s[i]); 
+			return ((char *) &s[i]);
 	}
 	if ((char)c == '\0' && s[i] == '\0')
 		return ((char *)&s[i]);
